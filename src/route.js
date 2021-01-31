@@ -1,7 +1,10 @@
 import React from 'react';
+import Scene3D from './lib/Scene3D';
+import Scene from './view/construction/Scene';
 import ViewCons from './view/construction/ViewCons';
 import Home from './view/home/Home';
 import Preview from './view/preview/Preview';
+import Showroom from './view/showroom/Showroom';
 
 const routes = [
     {
@@ -14,10 +17,15 @@ const routes = [
         exact: false,
         main: () => <ViewCons />
     },
+    // {
+    //     path: '/view',
+    //     exact: false,
+    //     main: () => <Preview />
+    // },
     {
-        path: '/view',
+        path: '/showroom',
         exact: false,
-        main: () => <Preview />
+        main: () => <Showroom />
     }
 ];
 

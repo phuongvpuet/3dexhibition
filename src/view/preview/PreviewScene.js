@@ -314,7 +314,7 @@ class PreviewScene extends React.Component {
                 }
             }
         }
-        this.raycastHead.set(this.camera.position, x);
+        //this.raycastHead.set(this.camera.position, x);
         let intersectCollide = this.raycastHead.intersectObjects(this.objects);
         if (intersectCollide.length > 0) {
             console.log("Collideeeee");

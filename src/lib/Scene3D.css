@@ -1,0 +1,9 @@
+.scene3d{
+    background-color: black;
+    width: 98%;
+    height: 98%;
+    display: grid;
+    place-items: center;
+    flex: 0.7;
+    border-radius: 5px;
+}

@@ -7,8 +7,8 @@ function Home() {
     return (
         <div>
             <h1>3D Exhibition Home Page</h1>
-            <Link to="/construction">
-            <Button variant="contained" color="primary" onClick= {create}>Create</Button>
+            <Link to="/showroom">
+            <Button variant="contained" color="primary" onClick= {create}>To Showroom</Button>
             </Link>
         </div>
     )
