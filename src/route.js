@@ -25,7 +25,7 @@ const routes = [
     {
         path: '/showroom',
         exact: false,
-        main: () => <Showroom />
+        main: () => <Preview />
     }
 ];
 
