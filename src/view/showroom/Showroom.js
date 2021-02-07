@@ -12,11 +12,9 @@ import material from "../../models/obj/bugatti.mtl";
 
 class Showroom extends Scene3D {
   onEnter() {
-    // const cube = GlobalFunc.createCube(THREE);
-    // this.scene.add(cube);
-    // this.cube = cube;
     this.setTextureFloor(texturePath);
-    this.loadOBJ(objModel, material);
+    let promise = this.loadOBJ(objModel, material);
+    promise.then(()=>{});
     this.initControls();
   }
   onClick(e) {

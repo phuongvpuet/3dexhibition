@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import {RGBELoader} from 'three/examples/jsm/loaders/RGBELoader'
 import texturePath from '../../textures/grasslight-big.jpg'
-import backHdr from '../../textures/hdr/royal_esplanade_1k.hdr'
+import backHdr from '../../textures/hdr/hdr_1.hdr'
 
 import './Scene.css'
 

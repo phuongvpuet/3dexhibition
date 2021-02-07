@@ -1,0 +1,12 @@
+.btnImage {
+  width: 104px;
+  height: 104px;
+  padding: 1px;
+  display: inline;
+}
+.image {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}

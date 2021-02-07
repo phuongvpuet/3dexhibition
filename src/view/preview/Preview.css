@@ -4,12 +4,30 @@
     width: 100%;
     height: 100%;
 }
+.btnImage{
+    display: inline;
+}
+.ButtonNav{
+    position: absolute;
+    display: flex;
+    padding-top: 1%;
+    padding-left: 1.5%;
+}
 
-.previewMain{
-    background-color: black;
-    width: 98%;
-    height: 98%;
+.ButtonNav2{
+    right: 0;
+    position: absolute;
+    display: flex;
+    padding-top: 1%;
+    padding-right: 1.5%;
+}
+
+.loading{
+    background-color: #ededed;
+    width: 100%;
+    height: 100%;
     display: grid;
     place-items: center;
-    border-radius: 5px;
+    flex: 0.7;
+    position: absolute;
 }

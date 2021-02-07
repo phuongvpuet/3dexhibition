@@ -3,7 +3,7 @@ import * as THREE from "./three.module.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import texturePath from "../textures/grasslight-big.jpg";
 import floor_1 from "../textures/floor_1.jpg";
-import backHdr from "../textures/hdr/royal_esplanade_1k.hdr";
+import backHdr from "../textures/hdr/hdr_1.hdr";
 import "./Scene3D.css";
 import { OBJLoader } from "./OBJLoader.js";
 import { MTLLoader } from "./MTLLoader.js";
@@ -13,7 +13,7 @@ class Scene3D extends React.Component {
     this.initCamera();
     this.initRenderder();
     this.initLight();
-    this.initBackGround(backHdr);
+    this.setBackGround(backHdr);
     //this.setTextureFloor(texturePath);
     this.addListener();
     this.onEnter();
@@ -36,27 +36,6 @@ class Scene3D extends React.Component {
       false
     );
   }
-  //   addClick() {
-  //     this.renderer.domElement.addEventListener("click", (e) => {
-  //       let x = e.offsetX === undefined ? e.layerX : e.offsetX;
-  //       let y = e.offsetY === undefined ? e.layerY : e.offsetY;
-
-  //       let coords3dClick = getClickIntersetion({ x: x, y: y }, e.target);
-  //       if (!coords3dClick) {
-  //         return;
-  //       }
-  //       let sp = new THREE.Sprite(new THREE.SpriteMaterial({ color: 0xff0000 }));
-  //       let pos = getPointInBetweenByPerc(camera.position, coords3dClick, 0.99);
-  //       sp.position.set(pos.x, pos.y, pos.z);
-  //       scene.add(sp);
-  //       let domLabel = createDomLabel(x, y, e.target);
-  //       let labelData = {
-  //         sp: sp,
-  //         domElem: domLabel,
-  //       };
-  //       arrLabels.push(labelData);
-  //     });
-  //   }
   onClick(event) {
     console.log("Click");
   }
@@ -70,36 +49,41 @@ class Scene3D extends React.Component {
     console.log("Mouse up");
   }
   loadOBJ(path, material) {
-    const loader = new OBJLoader();
-    //loader.setPath("../models/obj");
-    const materialLoader = new MTLLoader();
-    //materialLoader.setPath("../models/obj");
-    var scene = this.scene;
-    var self = this;
-    materialLoader.load(material, function (mat) {
-      loader.setMaterials(mat);
-      loader.load(
-        path,
-        function (obj) {
-          obj.y = -15;
-          //scene.add(obj);
-          var children = [...obj.children];
-          for(let i = 0; i < children.length; i++){
+    this.props.doneCallBack(false);
+    return new Promise((res, rej) => {
+      const loader = new OBJLoader();
+      //loader.setPath("../models/obj");
+      const materialLoader = new MTLLoader();
+      //materialLoader.setPath("../models/obj");
+      var scene = this.scene;
+      var self = this;
+      materialLoader.load(material, function (mat) {
+        loader.setMaterials(mat);
+        console.log("Load OBJ material");
+        loader.load(
+          path,
+          function (obj) {
+            obj.y = -15;
+            //scene.add(obj);
+            var children = [...obj.children];
+            for (let i = 0; i < children.length; i++) {
               let child = children[i];
               if (child.isMesh) {
                 scene.add(child);
                 self.targetList.push(child);
+              }
             }
+            console.log("Object added");
+            self.props.doneCallBack(true);
+          },
+          function (xhr) {
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded of model");
+          },
+          function (err) {
+            console.log(err);
           }
-          console.log("Object added");
-        },
-        function (xhr) {
-          console.log((xhr.loaded / xhr.total) * 100 + "% loaded of model");
-        },
-        function (err) {
-          console.log(err);
-        }
-      );
+        );
+      });
     });
   }
   initCamera() {
@@ -132,13 +116,13 @@ class Scene3D extends React.Component {
     this.targetList = [];
     this.raycaster = new THREE.Raycaster();
   }
-  initBackGround(hdr) {
+  setBackGround(hdr) {
     if (!this.scene) return;
+    console.log("Load hdr: " + hdr);
     let rgbeLoader = new RGBELoader();
     let pmremGenerator = new THREE.PMREMGenerator(this.renderer);
     rgbeLoader.setDataType(THREE.UnsignedByteType);
     rgbeLoader.load(hdr, (texture) => {
-      console.log("Load hdr");
       let envMap = pmremGenerator.fromEquirectangular(texture).texture;
       this.scene.background = envMap;
       this.scene.environment = envMap;
@@ -147,13 +131,13 @@ class Scene3D extends React.Component {
     });
   }
   setTextureFloor(path) {
-    this.removeChildByName("plane");
     const textureLoader = new THREE.TextureLoader();
     textureLoader.setCrossOrigin("anonymous");
     textureLoader.load(
       path,
       (texture) => {
         console.log("Loaded");
+        console.log("Path: " + path);
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(25, 25);
         texture.anisotropy = 16;
@@ -168,6 +152,7 @@ class Scene3D extends React.Component {
         );
         mesh.position.y = -15;
         mesh.rotation.x = -Math.PI / 2;
+        this.removeChildByName("plane");
         mesh.name = "plane";
         this.scene.add(mesh);
         this.plane = mesh;
@@ -183,8 +168,8 @@ class Scene3D extends React.Component {
   }
   removeChildByName(name) {
     var object = this.seekObject(name);
-    console.log("Remove object");
-    console.log(object);
+    console.log("Remove object: " + name);
+    //console.log(object);
     this.scene.remove(object);
   }
   start() {
@@ -207,6 +192,7 @@ class Scene3D extends React.Component {
     this.camera.updateProjectionMatrix();
   };
   animate = () => {
+    //console.log(this.props.floor);
     this.handleResize();
     let delta = this.clock.getDelta();
     this.frameId = window.requestAnimationFrame(this.animate);

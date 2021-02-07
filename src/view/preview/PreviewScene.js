@@ -3,7 +3,7 @@ import * as THREE from '../../lib/three.module.js'
 import { PointerLockControls } from '../../lib/PointerLockControls.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import texturePath from '../../textures/grasslight-big.jpg';
-import backHdr from '../../textures/hdr/royal_esplanade_1k.hdr';
+import backHdr from '../../textures/hdr/hdr_1.hdr';
 import * as GlobalFunc from '../../lib/GlobalFunc.js';
 import { GLTFLoader } from '../../lib/GLTFLoader.js';
 import demo from '../../models/demo.glb';

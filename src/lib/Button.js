@@ -1,17 +1,16 @@
 import React from 'react';
 import texturePath from "../textures/grasslight-big.jpg";
+import './css/Button.css';
 class ButtonImage extends React.Component{
-    
     onClick(){
-        console.log("Click on me");
+        if (this.props.hdr) this.props.callBack(this.props.hdr)
+        else this.props.callBack(this.props.src);
     }
     getSrc(){
         return this.props.src;
     }
     render(){
-        var style = {width: 100, height: 100, borderRadius: 0};
-        return <button><img src={this.props.src} alt="my image" onClick={this.onClick} style={style}/></button>
+        return <button className="btnImage"><img className="image" src={this.props.src} alt="my image" onClick={this.onClick.bind(this)}/></button>
     }
 }
-
 export default ButtonImage;

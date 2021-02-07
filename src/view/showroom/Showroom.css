@@ -1,7 +1,7 @@
 .showroomMain{
     background-color: black;
-    width: 98%;
-    height: 98%;
+    width: 99%;
+    height: 99%;
     display: grid;
     place-items: center;
     flex: 0.7;
