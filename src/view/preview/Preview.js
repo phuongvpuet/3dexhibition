@@ -10,11 +10,14 @@ import hdr_1_img from "../../textures/hdr/hdr_1.PNG";
 import hdr_2 from "../../textures/hdr/hdr_2.hdr";
 import hdr_2_img from "../../textures/hdr/hdr_2.PNG";
 import Loading from "../../lib/Loading";
+import Popup from "../../lib/PopUp";
 
 function Preview() {
   let scene = null;
   const [done, setDone] = useState(true);
   const [load, setLoad] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
+  const [contentPopup, setContentPopup] = useState(null);
   const setFloor = function (img) {
     scene.setTextureFloor(img);
   };
@@ -32,6 +35,11 @@ function Preview() {
         }, 500);
     } else setDone(loading);
   };
+  const showPopup = function(content){
+    console.log(content);
+    setContentPopup(content);
+    setIsPopup(true);
+  }
   return (
     <div className="preview">
       <span className="ButtonNav">
@@ -47,6 +55,7 @@ function Preview() {
           scene = instance;
         }}
         doneCallBack={setLoading}
+        showPopupCallBack = {showPopup}
       />
       {!done ? (
         <div className="loading">
@@ -55,6 +64,15 @@ function Preview() {
       ) : (
         <div></div>
       )}
+      {
+        isPopup ? (
+          <div className="scenePopup">
+            <Popup content={contentPopup} closePopup = {()=>{setIsPopup(false)}}/>
+          </div>
+        ) : (
+          <div></div>
+        )
+      }
     </div>
   );
 }

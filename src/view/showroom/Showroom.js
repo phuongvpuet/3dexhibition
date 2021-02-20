@@ -26,10 +26,11 @@ class Showroom extends Scene3D {
     if (!coords3dClick) {
       return;
     }
-    let sp = new THREE.Sprite(new THREE.SpriteMaterial({ color: 0xff0000 }));
-    let pos = this.getPointInBetweenByPerc(this.camera.position, coords3dClick, 0.99);
-    sp.position.set(pos.x, pos.y, pos.z);
-    this.scene.add(sp);
+    let content = {
+      name: "Car",
+      description: "A vehicle"
+    }
+    this.props.showPopupCallBack(content);
   }
   initControls() {
     const controls = new OrbitControls(this.camera, this.renderer.domElement);
