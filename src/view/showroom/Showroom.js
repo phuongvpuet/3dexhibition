@@ -9,12 +9,14 @@ import { OrbitControls } from "../../lib/OrbitControls.js";
 import "./Showroom.css";
 import objModel from "../../models/obj/bugatti.obj";
 import material from "../../models/obj/bugatti.mtl";
+import car_1_obj from "../../models/car_1/Car_model.obj";
+import car_1_mtl from "../../models/car_1/Car_model.obj";
 
 class Showroom extends Scene3D {
   onEnter() {
     this.setTextureFloor(texturePath);
-    let promise = this.loadOBJ(objModel, material);
-    promise.then(()=>{});
+    // let promise = this.loadOBJ(car_1_obj, car_1_mtl);
+    // promise.then(()=>{});
     this.initControls();
   }
   onClick(e) {

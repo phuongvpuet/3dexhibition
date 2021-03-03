@@ -11,6 +11,8 @@ import hdr_2 from "../../textures/hdr/hdr_2.hdr";
 import hdr_2_img from "../../textures/hdr/hdr_2.PNG";
 import Loading from "../../lib/Loading";
 import Popup from "../../lib/PopUp";
+import SimpleDropZOne from 'simple-dropzone';
+import DropZone from "../../lib/DropZone";
 
 function Preview() {
   let scene = null;
@@ -73,6 +75,9 @@ function Preview() {
           <div></div>
         )
       }
+      <div className="sceneDropZone">
+        <DropZone />
+      </div>
     </div>
   );
 }

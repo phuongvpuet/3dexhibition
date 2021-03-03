@@ -8,7 +8,7 @@ import * as GlobalFunc from '../../lib/GlobalFunc.js';
 import { GLTFLoader } from '../../lib/GLTFLoader.js';
 import demo from '../../models/demo.glb';
 import './PreviewScene.css'
-import { ThreeSixtyOutlined, ThreeSixtyRounded } from '@material-ui/icons';
+import {DropZone} from "../../lib/DropZone";
 
 class PreviewScene extends React.Component {
     componentDidMount() {

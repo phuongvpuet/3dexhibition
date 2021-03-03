@@ -7,6 +7,7 @@ import backHdr from "../textures/hdr/hdr_1.hdr";
 import "./Scene3D.css";
 import { OBJLoader } from "./OBJLoader.js";
 import { MTLLoader } from "./MTLLoader.js";
+import { GLTFLoader } from "./GLTFLoader";
 class Scene3D extends React.Component {
   componentDidMount() {
     this.initScene();
@@ -85,6 +86,9 @@ class Scene3D extends React.Component {
         );
       });
     });
+  }
+  loadGLB(path){
+    
   }
   initCamera() {
     const width = this.mount.clientWidth;
