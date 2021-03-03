@@ -33,3 +33,9 @@
     position: absolute;
 }
 
+.addModel{
+    position: fixed;
+    bottom: 2%;
+    left: 2%;
+}
+
